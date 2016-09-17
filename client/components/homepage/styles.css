@@ -42,3 +42,8 @@
   display: inline-block;
   border-radius: px(3);
 }
+
+.logo {
+  display: block;
+  margin: 0px auto 50px;
+}

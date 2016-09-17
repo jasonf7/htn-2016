@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import { example, p, link } from './styles';
+import { logo } from './styles';
 import { withRouter } from 'react-router'
 import FacebookLogin from 'react-facebook-login';
 
@@ -24,7 +24,7 @@ class Homepage extends Component {
           }
         ]}
       />
-      <img src='../../assets/sunny.png'></img>
+      <img className={logo} src='static/sunny.png'></img>
       <FacebookLogin
         appId="616403665233139"
         fields="name,email,picture"
