@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(88, 42, 42);
+  background-color: $red;
   &:before {
     content: '';
     height: 100%;

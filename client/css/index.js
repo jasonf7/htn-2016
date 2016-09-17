@@ -9,5 +9,6 @@ require('./global');
  */
 require('#app/components/app/styles');
 require('#app/components/homepage/styles');
-require('#app/components/usage/styles');
+require('#app/components/main/styles');
+require('#app/components/preview/styles');
 require('#app/components/not-found/styles');

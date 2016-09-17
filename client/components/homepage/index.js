@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import { example, p, link } from './styles';
-import { withRouter } from 'react-router'
+import { connect } from 'react-redux';
+import { logo } from './styles';
+import { authComplete } from '#app/actions';
+import { authenticate } from '#app/webapi';
+import { withRouter } from 'react-router';
 import FacebookLogin from 'react-facebook-login';
 
 class Homepage extends Component {
@@ -24,7 +27,7 @@ class Homepage extends Component {
           }
         ]}
       />
-      <img src='../../assets/sunny.png'></img>
+      <img className={logo} src='static/sunny.png'></img>
       <FacebookLogin
         appId="616403665233139"
         fields="name,email,picture"
@@ -37,9 +40,21 @@ class Homepage extends Component {
   onFacebookResponse = (response) => {
     console.log(response)
     if (response.id && response.accessToken) {
-      this.props.router.push('/main');
+      this.props.dispatch((dispatch) => {
+        const user = {
+          "Name": response.name,
+          "Email": response.email,
+          "Photo": response.picture.data.url,
+          "Id": response.id
+        }
+
+        authenticate(user, () => {
+          dispatch(authComplete(user))
+          this.props.router.push('/main');
+        })
+      })
     }
   }
 }
 
-export default withRouter(Homepage);
+export default connect(store => ({ config: store.config }))(withRouter(Homepage));
