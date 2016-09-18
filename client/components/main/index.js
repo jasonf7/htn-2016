@@ -38,7 +38,7 @@ class Main extends Component {
 
   render() {
     return <div className={container}>
-      <Helmet title='Main' />
+      <Helmet title='Home' />
       <Tabs
         value={this.state.value}
         onChange={this.handleChange}

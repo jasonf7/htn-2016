@@ -20,7 +20,7 @@ class Homepage extends Component {
   render() {
     return <div className={container}>
       <Helmet
-        title='Home page'
+        title='Log In'
         meta={[
           {
             property: 'og:title',
