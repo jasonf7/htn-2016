@@ -7,6 +7,7 @@ import { Tabs, Tab } from 'material-ui/Tabs';
 import MapIcon from 'material-ui/svg-icons/maps/map';
 import CameraIcon from 'material-ui/svg-icons/maps/local-see';
 import GalleryIcon from 'material-ui/svg-icons/image/photo-library';
+import MapView from './map';
 
 class Main extends Component {
 
@@ -52,10 +53,8 @@ class Main extends Component {
             Camera
           </div>
         </Tab>
-        <Tab icon={<MapIcon />} value="map" >
-          <div>
-            Map
-          </div>
+        <Tab icon={<MapIcon />} value="map">
+          <MapView />
         </Tab>
       </Tabs>
     </div>;
