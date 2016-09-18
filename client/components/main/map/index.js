@@ -91,6 +91,9 @@ export default class MapView extends Component {
 
   componentDidUpdate() {
     const data = normalizeSentimentData(this.props.entries);
+    console.log(data)
+    console.log(data.filter(entry => entry.weight > 0))
+    console.log(data.filter(entry => (entry.weight <= 0)).map(entry => ({location: entry.location, weight: -1 * entry.weight})))
 
     const heatmap = new google.maps.visualization.HeatmapLayer({
       data: data.filter(entry => entry.weight > 0)
