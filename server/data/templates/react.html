@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/static/build/bundle.css">
     {{ .HTMLTitle }}
     {{ .HTMLMeta }}
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
   </head>
   <body>
     {{if .Error}}
@@ -43,5 +44,15 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfr_c4d9rAHpjQr-bEcObUK-zqQ2uFZ-w&libraries=visualization,places">
     </script>
     <script async defer src="/static/build/bundle.js" onload="this.parentElement.removeChild(this)"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyBxirpWQfrXRAnRVBGTL_jpDaRi3LhCOwk",
+        authDomain: "hackthenorth16-1579.firebaseapp.com",
+        databaseURL: "https://hackthenorth16-1579.firebaseio.com",
+        storageBucket: "hackthenorth16-1579.appspot.com",
+        messagingSenderId: "535677865997"
+      };
+      firebase.initializeApp(config);
+    </script>
   </body>
 </html>

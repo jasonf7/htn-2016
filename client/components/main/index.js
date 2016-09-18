@@ -45,15 +45,16 @@ class Main extends Component {
   }
 
   handleChange = (value) => {
-    if (value != 'camera') {
+    // if (value != 'camera') {
       this.setState({
         value,
       });
-    } else {
-      this.setState({
-        value: this.state.value
-      })
-    }
+    // }
+    // else {
+    //   this.setState({
+    //     value: this.state.value
+    //   })
+    // }
   }
 
   render() {
@@ -71,6 +72,7 @@ class Main extends Component {
         <Tab icon={<CameraIcon />} value="camera">
           <div>
             Camera
+            go <IndexLink to='/record'>record</IndexLink>
           </div>
         </Tab>
         <Tab icon={<MapIcon />} value="map">
