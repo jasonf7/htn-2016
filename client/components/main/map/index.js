@@ -60,7 +60,10 @@ export default class MapView extends Component {
         }
         googleMapElement={
           <GoogleMap
-            ref={(map) => console.log(map)}
+            ref={(map) => {
+              this._gmap = map;
+              console.log(map);
+            }}
             defaultZoom={16}
             defaultCenter={{ lat: this.state.lat, lng: this.state.lng }}
             onClick={this.props.onMapClick}
@@ -69,6 +72,23 @@ export default class MapView extends Component {
         }
       />
     </div>
+  }
+
+  componentDidUpdate() {
+    var dummyHeatMapData = [
+      {location: new google.maps.LatLng(43.4642578, -80.5204096), weight: 5},
+      {location: new google.maps.LatLng(43.46000, -80.5204096), weight: 1},
+      {location: new google.maps.LatLng(44.782, -81.443), weight: 2},
+      {location: new google.maps.LatLng(40.582, -79.441), weight: 3},
+      {location: new google.maps.LatLng(38.182, -80.439), weight: 2},
+      new google.maps.LatLng(39.182, -82.37)
+    ];
+
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+      data: dummyHeatMapData
+    });
+    heatmap.setMap(this._gmap.props.map);
+    heatmap.set('radius', heatmap.get('radius') ? null : 20);
   }
 
   onPlaceSelected = (place) => {
