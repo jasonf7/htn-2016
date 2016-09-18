@@ -6,9 +6,21 @@ import toString from './toString';
 import { Promise } from 'when';
 import createRoutes from './routes';
 import { createStore, setAsCurrentStore } from '../store';
+import {orange600, amber50} from 'material-ui/styles/colors';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+const muiTheme = getMuiTheme({
+  palette: {
+    primary1Color: orange600,
+    accent1Color: amber50
+  }
+});
 
 
 export function run() {
+  injectTapEventPlugin();
   // init promise polyfill
   window.Promise = window.Promise || Promise;
   // init fetch polyfill
@@ -20,7 +32,9 @@ export function run() {
 
   render(
     <Provider store={store} >
-      <Router history={browserHistory}>{createRoutes({store, first: { time: true }})}</Router>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <Router history={browserHistory}>{createRoutes({store, first: { time: true }})}</Router>
+      </MuiThemeProvider>
     </Provider>,
     document.getElementById('app')
   );

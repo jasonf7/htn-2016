@@ -1,17 +1,7 @@
-body {
-  background-color: $red;
-  &:before {
-    content: '';
-    height: 100%;
-    display: inline-block;
-    vertical-align: middle;
-  }
+:global(#app) {
+  height: 100%;
 }
 
-:global(#app) {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 0 px(100);
-  text-align: center;
-  width: 99%;
+.container {
+  height: 100%;
 }
