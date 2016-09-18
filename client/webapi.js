@@ -9,3 +9,9 @@ export function authenticate(user, callback) {
   })
   .then(callback)
 }
+
+export function getEntries() { //TODO: Pass a location
+  return fetch('/api/v1/entries', {
+    method: 'GET'
+  })
+}

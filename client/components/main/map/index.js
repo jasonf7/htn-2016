@@ -3,6 +3,7 @@ import { container } from './styles';
 import Autocomplete from 'react-google-autocomplete';
 import { GoogleMap, Marker, GoogleMapLoader, OverlayView } from "react-google-maps";
 import { radialOverlay } from './styles';
+import { normalizeSentimentData } from '#app/utils';
 
 export default class MapView extends Component {
   /*eslint-disable */
@@ -89,20 +90,35 @@ export default class MapView extends Component {
   }
 
   componentDidUpdate() {
-    var dummyHeatMapData = [
-      {location: new google.maps.LatLng(43.4642578, -80.5204096), weight: 5},
-      {location: new google.maps.LatLng(43.46000, -80.5204096), weight: 1},
-      {location: new google.maps.LatLng(44.782, -81.443), weight: 2},
-      {location: new google.maps.LatLng(40.582, -79.441), weight: 3},
-      {location: new google.maps.LatLng(38.182, -80.439), weight: 2},
-      new google.maps.LatLng(39.182, -82.37)
-    ];
+    const data = normalizeSentimentData(this.props.entries);
 
-    var heatmap = new google.maps.visualization.HeatmapLayer({
-      data: dummyHeatMapData
+    const heatmap = new google.maps.visualization.HeatmapLayer({
+      data: data.filter(entry => entry.weight > 0)
     });
     heatmap.setMap(this._gmap.props.map);
     heatmap.set('radius', heatmap.get('radius') ? null : 20);
+
+    const coldmap = new google.maps.visualization.HeatmapLayer({
+      data: data.filter(entry => (entry.weight <= 0)).map(entry => ({location: entry.location, weight: -1 * entry.weight}))
+    });
+    coldmap.setMap(this._gmap.props.map);
+    coldmap.set('radius', coldmap.get('radius') ? null : 20);
+    heatmap.set('gradient', [
+      'rgba(0, 255, 255, 0)',
+      'rgba(0, 255, 255, 1)',
+      'rgba(0, 191, 255, 1)',
+      'rgba(0, 127, 255, 1)',
+      'rgba(0, 63, 255, 1)',
+      'rgba(0, 0, 255, 1)',
+      'rgba(0, 0, 223, 1)',
+      'rgba(0, 0, 191, 1)',
+      'rgba(0, 0, 159, 1)',
+      'rgba(0, 0, 127, 1)',
+      'rgba(63, 0, 91, 1)',
+      'rgba(127, 0, 63, 1)',
+      'rgba(191, 0, 31, 1)',
+      'rgba(255, 0, 0, 1)']
+    );
 
     this._gmap.props.map.panTo(new google.maps.LatLng(this.state.lat, this.state.lng));
   }
@@ -128,4 +144,9 @@ export default class MapView extends Component {
   }
 
   stopPropagation = (e) => {e.stopPropagation()}
+}
+
+MapView.propTypes = {
+  dispatch: React.PropTypes.func,
+  entries: React.PropTypes.array
 }

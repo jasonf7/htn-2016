@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_CONFIG, AUTH_COMPLETE } from './actions';
+import { SET_CONFIG, AUTH_COMPLETE, UPDATE_ENTRIES } from './actions';
 
 function config(state = {}, action) {
   switch (action.type) {
@@ -21,4 +21,13 @@ function authentication(state = {}, action) {
   }
 }
 
-export default combineReducers({config, authentication});
+function entries(state = [], action) {
+  switch (action.type) {
+    case UPDATE_ENTRIES:
+      return action.entries.slice(0); // returns copy of the array
+    default:
+      return state;
+  }
+}
+
+export default combineReducers({config, authentication, entries});
