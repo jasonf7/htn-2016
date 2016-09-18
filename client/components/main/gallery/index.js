@@ -7,6 +7,20 @@ import IconButton from 'material-ui/IconButton';
 import Subheader from 'material-ui/Subheader';
 import StarBorder from 'material-ui/svg-icons/toggle/star-border';
 
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    width: 800,
+    height: 1000,
+    overflowY: 'visible',
+    marginBottom: 24,
+  },
+};
+
 export default class GalleryView extends Component {
 
   /*eslint-disable */
@@ -16,22 +30,22 @@ export default class GalleryView extends Component {
   /*eslint-enable */
 
   render() {
-    return <div>
+    return <div style={styles.root}>
       <Helmet title='Gallery' />
-      <h2>Gallery</h2>
       <GridList
-        cellHeight={200}
+        style={styles.gridList}
+        cellHeight={400}
+        cellWidth={400}
       >
-        <Subheader>test</Subheader>
         {this.props.entries.map((entry) => (
           <GridTile
+            titlePosition='top'
             key={entry.Id}
             title={entry.Id}
             subtitle={<span>by <b>{entry.UserId}</b></span>}
             actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
           >
-            <video>
-              <source src={entry.Url} type="video/mp4" />
+            <video src={entry.Url} type="video/mp4" height="400" width="400" controls>
             </video>
           </GridTile>
         ))}
