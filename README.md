@@ -2,7 +2,9 @@
 
 ## Set-up
 
-```$ npm i```
-```$ srlt restore```
-```$ make serve```
-```$ Hit up localhost:5001```
+```
+$ npm i
+$ srlt restore
+$ make serve
+$ Hit up localhost:5001
+```
