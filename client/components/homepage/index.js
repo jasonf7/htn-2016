@@ -7,6 +7,7 @@ import { authComplete } from '#app/actions';
 import { authenticate } from '#app/webapi';
 import { withRouter } from 'react-router';
 import FacebookLogin from 'react-facebook-login';
+import { container } from './styles';
 
 class Homepage extends Component {
   /*eslint-disable */
@@ -17,7 +18,7 @@ class Homepage extends Component {
   /*eslint-enable */
 
   render() {
-    return <div>
+    return <div className={container}>
       <Helmet
         title='Home page'
         meta={[
