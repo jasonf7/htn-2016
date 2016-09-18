@@ -5,7 +5,6 @@ import Homepage from '#app/components/homepage';
 import Main from '#app/components/main';
 import Preview from '#app/components/preview';
 import NotFound from '#app/components/not-found';
-import Record from '#app/components/record';
 
 /**
  * Returns configured routes for different
@@ -31,7 +30,6 @@ export default ({store, first}) => {
     <IndexRoute component={Homepage} onEnter={w(Homepage.onEnter)}/>
     <Route path="main" component={Main} onEnter={w(Main.onEnter)}/>
     <Route path="preview" component={Preview} onEnter={w(Preview.onEnter)}/>
-    <Route path="record" component={Record} onEnter={w(Record.onEnter)}/>
     <Route path="*" component={NotFound} onEnter={w(NotFound.onEnter)}/>
   </Route>;
 };
