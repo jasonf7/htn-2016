@@ -56,6 +56,7 @@ func (api *API) Bind(group *echo.Group) {
 	group.Get("/v1/conf", api.ConfHandler)
 	group.Post("/v1/auth", api.AuthHandler)
 	group.Post("/v1/upload", api.UploadHandler)
+	group.Get("/v1/entries", api.EntriesHandler)
 }
 
 func (api *API) ConfHandler(c *echo.Context) error {
@@ -225,4 +226,30 @@ func (api *API) UploadHandler(c *echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, upload)
+}
+
+func (api *API) EntriesHandler(c *echo.Context) error {
+	// var slice := make([]int, elems)
+
+	rows, err := db.Query("SELECT * FROM entries")
+	if err != nil {
+		return err
+	}
+	defer rows.Close()
+
+	var entries []Upload
+	for rows.Next() {
+		var entry Upload
+
+		err := rows.Scan(&entry.Id, &entry.Longitude, &entry.Latitude, &entry.Mood_Polarity, &entry.Mood_Intensity, &entry.Description, &entry.Url, &entry.UserId)
+		if err != nil {
+			fmt.Print(err.Error() + "\n")
+		}
+
+		fmt.Print(strconv.Itoa(entry.Id) + "\n")
+
+		entries = append(entries, entry)
+	}
+
+	return c.JSON(http.StatusOK, entries)
 }
