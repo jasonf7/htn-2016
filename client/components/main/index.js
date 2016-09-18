@@ -8,6 +8,7 @@ import MapIcon from 'material-ui/svg-icons/maps/map';
 import CameraIcon from 'material-ui/svg-icons/maps/local-see';
 import GalleryIcon from 'material-ui/svg-icons/image/photo-library';
 import MapView from './map';
+import GalleryView from './gallery';
 import { getEntries } from '#app/webapi';
 import { updateEntries } from '#app/actions';
 
@@ -49,9 +50,7 @@ class Main extends Component {
         onChange={this.handleChange}
       >
         <Tab icon={<GalleryIcon />} value="gallery" >
-          <div>
-            Gallery
-          </div>
+          <GalleryView dispatch={this.props.dispatch} entries={this.props.entries} />
         </Tab>
         <Tab icon={<CameraIcon />} value="camera">
           <div>
