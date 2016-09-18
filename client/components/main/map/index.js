@@ -17,10 +17,10 @@ export default class MapView extends Component {
     super(props)
 
     this.state = {
-      physical_lng: -80.5204096,
-      physical_lat: 43.4642578,
-      lng: -80.5204096,
-      lat: 43.4642578
+      physical_lng: -80.54020690917969,
+      physical_lat: 43.47301483154297,
+      lng: -80.54020690917969,
+      lat: 43.47301483154297
     }
   }
 

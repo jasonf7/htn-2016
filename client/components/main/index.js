@@ -30,9 +30,13 @@ class Main extends Component {
         .then((entries) => entries.json())
         .then((entries) => {
           console.log(entries);
+          console.log('hi');
           dispatch(updateEntries(entries));
         })
     })
+  }
+
+  componentDidMount() {
   }
 
   handleChange = (value) => {

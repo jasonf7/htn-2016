@@ -36,6 +36,7 @@ var config  = {
   entry: {
     bundle: path.join(__dirname, 'client/index.js')
   },
+  devtool: "#source-map",
   output: {
     path: path.join(__dirname, 'server/data/static/build'),
     publicPath: "/static/build/",

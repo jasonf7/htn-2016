@@ -241,7 +241,7 @@ func (api *API) EntriesHandler(c *echo.Context) error {
 	for rows.Next() {
 		var entry Upload
 
-		err := rows.Scan(&entry.Id, &entry.Longitude, &entry.Latitude, &entry.Mood_Polarity, &entry.Mood_Intensity, &entry.Description, &entry.Url, &entry.UserId)
+		err := rows.Scan(&entry.Id, &entry.Latitude, &entry.Longitude, &entry.Mood_Polarity, &entry.Mood_Intensity, &entry.Description, &entry.Url, &entry.UserId)
 		if err != nil {
 			fmt.Print(err.Error() + "\n")
 		}
