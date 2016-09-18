@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { container } from './styles';
 import Autocomplete from 'react-google-autocomplete';
-import { GoogleMap, Marker, GoogleMapLoader } from "react-google-maps";
+import { GoogleMap, Marker, GoogleMapLoader, OverlayView } from "react-google-maps";
+import { radialOverlay } from './styles';
 
 export default class MapView extends Component {
   /*eslint-disable */
@@ -15,6 +16,8 @@ export default class MapView extends Component {
     super(props)
 
     this.state = {
+      physical_lng: -80.5204096,
+      physical_lat: 43.4642578,
       lng: -80.5204096,
       lat: 43.4642578
     }
@@ -24,8 +27,8 @@ export default class MapView extends Component {
     if ('geolocation' in navigator) {
       this.watchID = navigator.geolocation.watchPosition((position) => {
         this.setState({
-          lng: position.coords.longitude,
-          lat: position.coords.latitude
+          physical_lng: position.coords.longitude,
+          physical_lat: position.coords.latitude
         })
       });
     }
@@ -38,6 +41,9 @@ export default class MapView extends Component {
   }
 
   render() {
+    console.log(this.state.lat);
+    console.log(this.state.lng);
+
     return <div className={container}>
       <Autocomplete
         style={{
@@ -66,8 +72,16 @@ export default class MapView extends Component {
             }}
             defaultZoom={16}
             defaultCenter={{ lat: this.state.lat, lng: this.state.lng }}
-            onClick={this.props.onMapClick}
+            onClick={this.onMapClick}
           >
+            <OverlayView
+              position={{ lat: this.state.lat, lng: this.state.lng }}
+              mapPaneName={OverlayView.OVERLAY_LAYER}
+              getPixelPositionOffset={this.getPixelPositionOffset}
+            >
+              <div className={radialOverlay}>
+              </div>
+            </OverlayView>
           </GoogleMap>
         }
       />
@@ -89,6 +103,18 @@ export default class MapView extends Component {
     });
     heatmap.setMap(this._gmap.props.map);
     heatmap.set('radius', heatmap.get('radius') ? null : 20);
+
+    this._gmap.props.map.panTo(new google.maps.LatLng(this.state.lat, this.state.lng));
+  }
+
+  onMapClick = (location) => {
+    console.log(location.latLng.lat());
+    console.log(location.latLng.lng());
+
+    this.setState({
+      lng: location.latLng.lat(),
+      lat: location.latLng.lng()
+    });
   }
 
   onPlaceSelected = (place) => {
