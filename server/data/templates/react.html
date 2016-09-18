@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/static/build/bundle.css">
     {{ .HTMLTitle }}
     {{ .HTMLMeta }}
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
   </head>
   <body>
     {{if .Error}}
@@ -40,5 +41,15 @@
     <div id="app">{{ .HTMLApp }}</div>
     <script onload="this.parentElement.removeChild(this)">window['--app-initial'] = JSON.parse("{{if .Initial}}{{ .Initial }}{{else}}{}{{end}}");</script>
     <script async defer src="/static/build/bundle.js" onload="this.parentElement.removeChild(this)"></script>
+    <script>
+      var config = {
+        apiKey: "AIzaSyBxirpWQfrXRAnRVBGTL_jpDaRi3LhCOwk",
+        authDomain: "hackthenorth16-1579.firebaseapp.com",
+        databaseURL: "https://hackthenorth16-1579.firebaseio.com",
+        storageBucket: "hackthenorth16-1579.appspot.com",
+        messagingSenderId: "535677865997"
+      };
+      firebase.initializeApp(config);
+    </script>
   </body>
 </html>

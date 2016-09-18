@@ -15,7 +15,10 @@ class Main extends Component {
     return <div>
       <Helmet title='Main' />
       <h2>Main page</h2>
-      go <IndexLink to='/'>home</IndexLink>
+      <div>
+        go <IndexLink to='/'>home</IndexLink>
+        go <IndexLink to='/record'>record</IndexLink>
+      </div>
     </div>;
   }
 
