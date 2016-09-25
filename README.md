@@ -1,7 +1,6 @@
 # Vio
 
-Location-based video diaries with sentimental analysis. These are crowdsourced to create a geospatial mood heatmap.
-Made at Hack the North 2016.
+Vio is a video diary web application developed at Hack the North 2016, which uniquely features a geospatial heatmap of moods.
 
 ![Login](screenshots/login.png)
 ![Map](screenshots/map.png)
